@@ -10,7 +10,8 @@ class ActivityLog extends Model
         'user_id', 'user_name', 'pis_number',
         'action', 'model_type', 'model_id', 'description',
         'changes', 'area_name', 'mine_code', 'year', 'quarter',
-        'ip_address', 'log_file',
+        'ip_address', 'browser', 'platform', 'device', 'user_agent',
+        'url', 'method', 'log_file',
     ];
 
     protected $casts = ['changes' => 'array'];

@@ -82,6 +82,7 @@
                             <th>Action</th>
                             <th>User (PIS)</th>
                             <th>Description</th>
+                            <th>IP / Client</th>
                             <th>Area</th>
                             <th>Mine</th>
                             <th>FY / Qtr</th>
@@ -94,6 +95,7 @@
                             $actionColors = [
                                 'CREATE'=>'success','UPDATE'=>'warning','DELETE'=>'danger',
                                 'UPLOAD'=>'primary','LOGIN'=>'info','LOGOUT'=>'secondary',
+                                'LOGIN_FAILED'=>'danger',
                             ];
                             $color = $actionColors[$log->action] ?? 'secondary';
                         @endphp
@@ -105,6 +107,16 @@
                                 <code class="small">{{ $log->pis_number }}</code>
                             </td>
                             <td>{{ $log->description }}</td>
+                            <td class="small">
+                                <code class="text-dark">{{ $log->ip_address ?? '-' }}</code>
+                                @if($log->browser || $log->platform)
+                                <br>
+                                <span class="text-muted" title="{{ $log->user_agent }}">
+                                    <i class="bi bi-{{ $log->device === 'Mobile' ? 'phone' : ($log->device === 'Tablet' ? 'tablet' : 'pc-display') }}"></i>
+                                    {{ $log->browser }} / {{ $log->platform }}
+                                </span>
+                                @endif
+                            </td>
                             <td class="text-muted">{{ $log->area_name ?? '-' }}</td>
                             <td><code>{{ $log->mine_code ?? '-' }}</code></td>
                             <td class="text-muted">
@@ -126,7 +138,7 @@
                             </td>
                         </tr>
                         @empty
-                        <tr><td colspan="8" class="text-center text-muted py-4">No activity logs found.</td></tr>
+                        <tr><td colspan="9" class="text-center text-muted py-4">No activity logs found.</td></tr>
                         @endforelse
                     </tbody>
                 </table>

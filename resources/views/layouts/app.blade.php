@@ -89,7 +89,7 @@
             <a href="{{ route('upload.index') }}" title="Upload CSV"
                class="nav-link {{ request()->routeIs('upload.index') || request()->routeIs('upload.preview') || request()->routeIs('upload.store') ? 'active' : '' }}">
                 <i class="bi bi-cloud-upload"></i>
-                <span class="nav-label"> Upload CSV@role('area_admin') <small class="opacity-75">(My Areas)</small>@endrole</span>
+                <span class="nav-label"> Upload CSV{!! auth()->user()->hasRole('area_admin') ? ' <small class="opacity-75">(My Areas)</small>' : '' !!}</span>
             </a>
             @role('super_admin|admin')
             <a href="{{ route('upload.bulk.index') }}" title="Upload CSV – All Areas"
